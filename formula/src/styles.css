@@ -5,9 +5,9 @@
   --color-branco: rgb(244 244 245);
   --color-verde: #dce775;
   --color-verdeHover: rgba(225, 245, 97, 0.762);
-  --color-preta: rgb(24 24 27);
+  --color-preto: rgb(24 24 27);
   --color-cinza: rgb(33, 33, 37);
-  --color-vermelha: #e77575;
+  --color-vermelho: #e77575;
 }
 
 html,
