@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@theme {
+  --color-branco: rgb(244 244 245);
+  --color-verde: #dce775;
+  --color-verdeHover: rgba(225, 245, 97, 0.762);
+  --color-preta: rgb(24 24 27);
+  --color-cinza: rgb(33, 33, 37);
+  --color-vermelha: #e77575;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
