@@ -1,0 +1,23 @@
+<mat-toolbar class="bg-preto! py-20! ">
+  <div class="flex justify-between w-full px-25">
+    <p class="flex items-center text-branco hover:text-verdeHover cursor-pointer"><a routerLink="/home">Fórmula Motors</a></p>
+    <div class="">
+      <ul class="gap-5 items-center text-base inline-flex uppercase">
+
+        <li class="block"><a routerLink="/veiculos" class="inline-flex bg-verde hover:bg-verdeHover p-3 rounded-sm"><mat-icon fontIcon="directions_car" class="pr-7"></mat-icon>Veículos</a></li>
+
+        @if (logado) {
+
+        <li class="block"><a routerLink="/cadastrar_veiculo" class="inline-flex bg-verde hover:bg-verdeHover p-3 rounded-sm"><mat-icon fontIcon="add_circle" class="pr-7"></mat-icon>Cadastrar veículo</a></li>
+
+        <li class="block"><button type="button" class="inline-flex bg-verde hover:bg-verdeHover p-3 rounded-sm cursor-pointer uppercase" (click)="setLogado()"><mat-icon fontIcon="login" class="pr-7"></mat-icon>Logado</button></li> <!-- NÃO ESQUECER DE REMOVER (click) -->
+
+        } @else {
+
+        <li class="block"><a routerLink="/login" class="inline-flex bg-verde hover:bg-verdeHover p-3 rounded-sm" (click)="setLogado()"><mat-icon fontIcon="login" class="pr-7"></mat-icon>Entrar</a></li> <!-- NÃO ESQUECER DE REMOVER (click) -->
+
+        }
+      </ul>
+    </div>
+  </div>
+</mat-toolbar>

@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -10,12 +11,20 @@
   --color-vermelho: #e77575;
 }
 
-html,
-body {
-  height: 100%;
-}
+.material-icons.verde { color: #dce775; }
+.material-icons.branco { color: rgb(244 244 245); }
 
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+@media (max-width: 440px) {
+  body, html{
+    background-color: red;
+  }
+
+  footer{
+    background-color: blue;
+  }
 }
