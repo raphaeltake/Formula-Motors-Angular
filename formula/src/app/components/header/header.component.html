@@ -1,4 +1,4 @@
-<mat-toolbar class="bg-preto! py-20! ">
+<mat-toolbar class="relative bg-preto! py-20! ">
   <div class="flex justify-between w-full px-25">
     <p class="flex items-center text-branco hover:text-verdeHover cursor-pointer"><a routerLink="/home">Fórmula Motors</a></p>
     <div class="">
@@ -10,11 +10,41 @@
 
         <li class="block"><a routerLink="/cadastrar_veiculo" class="inline-flex bg-verde hover:bg-verdeHover p-3 rounded-sm"><mat-icon fontIcon="add_circle" class="pr-7"></mat-icon>Cadastrar veículo</a></li>
 
-        <li class="block"><button type="button" class="inline-flex bg-verde hover:bg-verdeHover p-3 rounded-sm cursor-pointer uppercase" (click)="setLogado()"><mat-icon fontIcon="login" class="pr-7"></mat-icon>Logado</button></li> <!-- NÃO ESQUECER DE REMOVER (click) -->
+        <li class="block"><button type="button" class="inline-flex bg-verde hover:bg-verdeHover p-3 rounded-sm cursor-pointer uppercase" (click)="setModal()"><mat-icon fontIcon="info" class="pr-7"></mat-icon>Logado</button></li> <!-- NÃO ESQUECER DE REMOVER (click) -->
+
+        @if(modal){
+        <div (click)="setModal()" class="bg-pretoTranslucido fixed inset-0 flex justify-center h-screen w-screen z-50">
+          <div class="absolute bg-cinza rounded-sm p-3 top-14 right-1/12">
+            <ul class="flex flex-col gap-3">
+
+              <li>
+                <button type="button" class="bg-verde hover:bg-verdeHover cursor-pointer flex w-full justify-center py-1 rounded-sm">
+                  <a routerLink="/funcionarios" class="px-3">
+                    Área funcionário
+                  </a>
+                </button>
+              </li>
+
+              <li>
+                <button type="button" (click)="setLogado()" class="bg-verde hover:bg-verdeHover cursor-pointer flex gap-1 w-full justify-center py-1 rounded-sm">
+                  Sair
+                  <mat-icon fontIcon="logout"></mat-icon>
+                </button>
+              </li>
+
+              <li>
+                <button type="button" (click)="setModal(); $event.stopPropagation()" class="bg-verde hover:bg-verdeHover cursor-pointer flex w-full justify-center py-1 rounded-sm">
+                  Fechar
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        }
 
         } @else {
 
-        <li class="block"><a routerLink="/login" class="inline-flex bg-verde hover:bg-verdeHover p-3 rounded-sm" (click)="setLogado()"><mat-icon fontIcon="login" class="pr-7"></mat-icon>Entrar</a></li> <!-- NÃO ESQUECER DE REMOVER (click) -->
+        <li class="block"><a routerLink="/login" class="inline-flex bg-verde hover:bg-verdeHover p-3 rounded-sm" ><mat-icon fontIcon="login" class="pr-7"></mat-icon>Entrar</a></li>
 
         }
       </ul>

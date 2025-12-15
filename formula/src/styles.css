@@ -9,6 +9,7 @@
   --color-preto: rgb(24 24 27);
   --color-cinza: rgb(33, 33, 37);
   --color-vermelho: #e77575;
+  --color-pretoTranslucido: rgba(24, 24, 27, 0.511);
 }
 
 .material-icons.verde { color: #dce775; }

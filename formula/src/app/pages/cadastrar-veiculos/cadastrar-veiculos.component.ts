@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Veiculo } from '../../models/veiculo';
+import { VeiculoService } from '../../services/veiculo.service';
 
 @Component({
   selector: 'app-cadastrar-veiculos',
@@ -7,5 +9,13 @@ import { Component } from '@angular/core';
   styleUrl: './cadastrar-veiculos.component.css'
 })
 export class CadastrarVeiculosComponent {
+  veiculo: Veiculo = Veiculo.newVeiculo()
 
+  constructor(
+    private service: VeiculoService,
+  ){}
+
+  adicionar(){
+    this.service.adicionar(this.veiculo)
+  }
 }

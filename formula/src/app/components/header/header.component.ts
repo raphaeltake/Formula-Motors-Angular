@@ -11,8 +11,13 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class HeaderComponent {
   logado: boolean = false
+  modal: boolean = false
 
   setLogado(){ //apenas para testes
     this.logado = !this.logado
+  }
+
+  setModal(){
+    this.modal = !this.modal
   }
 }

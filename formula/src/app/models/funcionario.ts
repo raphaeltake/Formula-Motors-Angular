@@ -1,4 +1,4 @@
-import { v4 as uuid } from "uuid"
+import { nanoid } from 'nanoid'
 
 export class Funcionario{
   id: string = ""
@@ -11,7 +11,7 @@ export class Funcionario{
 
   static newFuncionario(){
     const funcionario = new Funcionario()
-    funcionario.id = uuid()
+    funcionario.id = nanoid(5)
     return funcionario
   }
 }
