@@ -10,7 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  logado: boolean = false
+  gerenciarFuncionarios: boolean = true
+  logado: boolean = true
   modal: boolean = false
 
   setLogado(){ //apenas para testes

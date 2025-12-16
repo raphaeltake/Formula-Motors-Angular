@@ -1,0 +1,11 @@
+.fundoCarro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../../../assets/imagens/carroHome.webp);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  min-height: 20rem;
+  
+}

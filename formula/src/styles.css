@@ -8,6 +8,7 @@
   --color-verdeHover: rgba(225, 245, 97, 0.762);
   --color-preto: rgb(24 24 27);
   --color-cinza: rgb(33, 33, 37);
+  --color-cinzaClaro: rgb(46, 46, 53);
   --color-vermelho: #e77575;
   --color-pretoTranslucido: rgba(24, 24, 27, 0.511);
 }
@@ -17,15 +18,5 @@
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-@media (max-width: 440px) {
-  body, html{
-    background-color: red;
-  }
-
-  footer{
-    background-color: blue;
-  }
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
 }

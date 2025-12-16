@@ -1,6 +1,9 @@
 <mat-toolbar class="relative bg-preto! py-20! ">
   <div class="flex justify-between w-full px-25">
-    <p class="flex items-center text-branco hover:text-verdeHover cursor-pointer"><a routerLink="/home">Fórmula Motors</a></p>
+    <div>
+      <p class="flex items-center text-branco hover:text-verdeHover cursor-pointer"><a routerLink="/home">Fórmula Motors</a></p>
+      <button type="button" class="bg-amber-300 cursor-pointer " (click)="setLogado()">entrar</button> <!--Provisório-->
+    </div>
     <div class="">
       <ul class="gap-5 items-center text-base inline-flex uppercase">
 
@@ -17,6 +20,7 @@
           <div class="absolute bg-cinza rounded-sm p-3 top-14 right-1/12">
             <ul class="flex flex-col gap-3">
 
+              @if(gerenciarFuncionarios){
               <li>
                 <button type="button" class="bg-verde hover:bg-verdeHover cursor-pointer flex w-full justify-center py-1 rounded-sm">
                   <a routerLink="/funcionarios" class="px-3">
@@ -24,16 +28,17 @@
                   </a>
                 </button>
               </li>
+              }
 
               <li>
-                <button type="button" (click)="setLogado()" class="bg-verde hover:bg-verdeHover cursor-pointer flex gap-1 w-full justify-center py-1 rounded-sm">
+                <button type="button" (click)="setLogado()" class="bg-verde hover:bg-verdeHover cursor-pointer flex gap-1 w-full justify-center py-1 rounded-sm px-3">
                   Sair
                   <mat-icon fontIcon="logout"></mat-icon>
                 </button>
               </li>
 
               <li>
-                <button type="button" (click)="setModal(); $event.stopPropagation()" class="bg-verde hover:bg-verdeHover cursor-pointer flex w-full justify-center py-1 rounded-sm">
+                <button type="button" (click)="setModal(); $event.stopPropagation()" class="bg-verde hover:bg-verdeHover cursor-pointer flex w-full justify-center py-1 rounded-sm px-3">
                   Fechar
                 </button>
               </li>
@@ -44,7 +49,7 @@
 
         } @else {
 
-        <li class="block"><a routerLink="/login" class="inline-flex bg-verde hover:bg-verdeHover p-3 rounded-sm" ><mat-icon fontIcon="login" class="pr-7"></mat-icon>Entrar</a></li>
+        <li class="block"><a routerLink="/login" class="inline-flex bg-verde hover:bg-verdeHover p-3 rounded-sm"><mat-icon fontIcon="login" class="pr-7"></mat-icon>Entrar</a></li>
 
         }
       </ul>
