@@ -1,7 +1,7 @@
-<mat-toolbar class="relative bg-preto! py-20! ">
+<header class="relative bg-preto! py-20! text-preto">
   <div class="flex justify-between w-full px-25">
     <div>
-      <p class="flex items-center text-branco hover:text-verdeHover cursor-pointer"><a routerLink="/home">Fórmula Motors</a></p>
+      <p class="flex items-center text-2xl text-branco hover:text-verdeHover cursor-pointer"><a routerLink="/home">Fórmula Motors</a></p>
       <button type="button" class="bg-amber-300 cursor-pointer " (click)="setLogado()">entrar</button> <!--Provisório-->
     </div>
     <div class="">
@@ -9,7 +9,7 @@
 
         <li class="block"><a routerLink="/veiculos" class="inline-flex bg-verde hover:bg-verdeHover p-3 rounded-sm"><mat-icon fontIcon="directions_car" class="pr-7"></mat-icon>Veículos</a></li>
 
-        @if (logado) {
+        @if (statusLogado()) {
 
         <li class="block"><a routerLink="/cadastrar_veiculo" class="inline-flex bg-verde hover:bg-verdeHover p-3 rounded-sm"><mat-icon fontIcon="add_circle" class="pr-7"></mat-icon>Cadastrar veículo</a></li>
 
@@ -20,7 +20,7 @@
           <div class="absolute bg-cinza rounded-sm p-3 top-14 right-1/12">
             <ul class="flex flex-col gap-3">
 
-              @if(gerenciarFuncionarios){
+              @if(statusGerenciarFuncionarios()){
               <li>
                 <button type="button" class="bg-verde hover:bg-verdeHover cursor-pointer flex w-full justify-center py-1 rounded-sm">
                   <a routerLink="/funcionarios" class="px-3">
@@ -55,4 +55,4 @@
       </ul>
     </div>
   </div>
-</mat-toolbar>
+</header>

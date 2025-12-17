@@ -9,13 +9,13 @@ import { VeiculoService } from '../../services/veiculo.service';
   styleUrl: './cadastrar-veiculos.component.css'
 })
 export class CadastrarVeiculosComponent {
-  veiculo: Veiculo = Veiculo.newVeiculo()
+  // veiculo: Veiculo = Veiculo.newVeiculo()
 
-  constructor(
-    private service: VeiculoService,
-  ){}
+  // constructor(
+  //   private service: VeiculoService,
+  // ){}
 
-  adicionar(){
-    this.service.adicionar(this.veiculo)
-  }
+  // adicionar(){
+  //   this.service.adicionar(this.veiculo)
+  // }
 }

@@ -1,1 +1,29 @@
-<p>veiculos works!</p>
+@for (veiculo of listaVeiculos(); track veiculo.id){
+@if(veiculo.status === true || statusLogado()){ <!--Exibe para os clientes somente os veículos disponíveis--> 
+<div class="grid grid-cols-[auto_1fr_auto] max-h-70 mx-25 my-10 rounded-sm bg-cinza p-10 jus">
+  <img [src]="veiculo.caminho_imagem" alt="" class="w-60 mr-10 ">
+  <div class="grid items-center">
+    <h2 class="text-6xl font-bold">{{veiculo.modelo}} | R${{veiculo.valor}} | {{veiculo.categoria}}</h2>
+    <ul class="flex gap-10 text-[1.3rem]">
+      <li>Ano: {{veiculo.ano}}</li>
+      <li>Cor: {{veiculo.cor}}</li>
+      <li>Motor: {{veiculo.motor}}</li>
+      @if(statusLogado()){ <!--Somente quem está logado como funcionário pode ter acesso ao status-->
+      <li>Status: <span class="text-{{veiculo.status ? 'verde' : 'vermelho'}}">{{statusVeiculoTexto(veiculo)}}</span></li>
+      }
+    </ul>
+  </div>
+  @if(statusLogado()){ <!--Somente quem está logado como funcionário pode utilizar esse botões-->
+  <div>
+    <ul class="grid gap-4 text-preto w-40 h-full">
+      <li><button type="button" class="bg-verde hover:bg-verdeHover px-8 py-3 w-full rounded-sm cursor-pointer">Editar</button></li> <!--Edita o anúncio-->
+
+      <li><button type="button" (click)="setAnuncioStatus(veiculo)" class="bg-verde hover:bg-verdeHover px-8 py-3 w-full rounded-sm cursor-pointer">{{statusBotaoCancelarOuAtivar(veiculo)}}</button></li> <!--cancela/ativa o anúncio-->
+
+      <li><button type="button" class="bg-verde hover:bg-verdeHover px-8 py-3 w-full rounded-sm cursor-pointer">Apagar</button></li> <!--Excluí o anúncio-->
+    </ul>
+  </div>
+  }
+</div>
+}
+}

@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { RouterLink } from "@angular/router";
 import { MatIconModule } from '@angular/material/icon';
+import { FuncionariosService } from '../../services/funcionarios.service';
 
 @Component({
   selector: 'app-header',
@@ -10,15 +11,24 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  gerenciarFuncionarios: boolean = true
-  logado: boolean = true
-  modal: boolean = false
+  modal: boolean = false;
 
-  setLogado(){ //apenas para testes
-    this.logado = !this.logado
+  constructor(private service: FuncionariosService) { }
+
+  statusLogado() {
+    return this.service.statusLogado()
   }
 
-  setModal(){
-    this.modal = !this.modal
+  setLogado() {
+    this.service.setLogado();
+    this.statusLogado()
+  }
+
+  statusGerenciarFuncionarios() {
+    return this.service.statusGerenciarFuncionarios()
+  }
+
+  setModal() {
+    this.modal = !this.modal;
   }
 }

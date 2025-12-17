@@ -8,19 +8,28 @@ export class VeiculoService {
 
   static REPO_VEICULOS = "_VEICULOS"
 
+  veiculos: Veiculo[] = [new Veiculo("11111f", "Kombi", "VW", "Van", "1999", "Branca", "10.000", "1.0", "/assets/imgVeiculos/vw-kombi.webp", true), new Veiculo("2222f", "Fox", "VW", "Hatche", "2016", "Vermelho", "20.000", "1.0", "/assets/imgVeiculos/vw-fox.webp", false)] //Veículos teste
+
   constructor() { }
 
-  adicionar(veiculo: Veiculo){
+  setAnuncioStatus(veiculo: Veiculo) {
+    veiculo.status = !veiculo.status
+  }
+
+  statusAnuncio(veiculo: Veiculo) {
+    return veiculo.status
+  }
+
+  adicionar(veiculo: Veiculo) {
     const storage = this.obterStorageVeiculos()
     storage.push(veiculo)
     localStorage.setItem(VeiculoService.REPO_VEICULOS, JSON.stringify(veiculo))
   }
 
-
-  private obterStorageVeiculos() : Veiculo[]{
+  private obterStorageVeiculos(): Veiculo[] {
     const repositorioVeiculos = localStorage.getItem(VeiculoService.REPO_VEICULOS)
 
-    if(repositorioVeiculos){
+    if (repositorioVeiculos) {
       const veiculos: Veiculo[] = JSON.parse(repositorioVeiculos)
       return veiculos
     }

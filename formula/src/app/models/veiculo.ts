@@ -7,13 +7,27 @@ export class Veiculo {
   categoria: string = ""
   ano: string = ""
   cor: string = ""
-  valor: number = 0
+  valor: string = ""
   motor: string = ""
   caminho_imagem?: string
+  status?: boolean
+
+  constructor(id: string, modelo: string, marca: string, categoria: string, ano: string, cor: string, valor: string, motor: string, caminho_imagem?: string, status?: boolean) {
+    this.id = id
+    this.modelo = modelo
+    this.marca = marca
+    this.categoria = categoria
+    this.ano = ano
+    this.cor = cor
+    this.valor = valor
+    this.motor = motor
+    this.caminho_imagem = caminho_imagem
+    this.status = status //Remover, todos os veículos adicionados terão status = true
+  }
 
   static newVeiculo() {
-    const veiculo = new Veiculo()
-    veiculo.id = uuid()
-    return veiculo
+    // const veiculo = new Veiculo()
+    // veiculo.id = uuid()
+    // return veiculo
   }
 }

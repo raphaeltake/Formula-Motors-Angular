@@ -8,6 +8,7 @@
       <input matInput type="{{verSenha ? 'password' : 'text'}}" [(ngModel)]="senha" name="senha" id="senha" placeholder="Senha:" class="p-2 outline-0 focus:border-verdeHover hover:border-verdeHover border-2 rounded-sm border-cinzaClaro">
       <mat-icon fontIcon="{{verSenha ? 'visibility_off' : 'visibility'}}" (click)="setVerSenha()" class="cursor-pointer mr-2 branco"></mat-icon>
     </div>
+    
     <button type="submit" (click)="verificarLogin()" class="cursor-pointer bg-verde hover:bg-verdeHover text-preto py-2 rounded-sm">Entrar</button>
   </form>
 </section>
