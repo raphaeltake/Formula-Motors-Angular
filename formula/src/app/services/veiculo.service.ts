@@ -8,7 +8,7 @@ export class VeiculoService {
 
   static REPO_VEICULOS = "_VEICULOS"
 
-  veiculos: Veiculo[] = [new Veiculo("11111f", "Kombi", "VW", "Van", "1999", "Branca", "10.000", "1.0", "/assets/imgVeiculos/vw-kombi.webp", true), new Veiculo("2222f", "Fox", "VW", "Hatche", "2016", "Vermelho", "20.000", "1.0", "/assets/imgVeiculos/vw-fox.webp", false)] //Veículos teste
+  veiculos: Veiculo[] = [new Veiculo("11111f", "Kombi", "VW", "Van", "1999", "Branca", "10.000", "1.0", 10, "/assets/imgVeiculos/vw-kombi.webp", true), new Veiculo("2222f", "Fox", "VW", "Hatch", "2016", "Vermelho", "20.000", "1.0", 5, "/assets/imgVeiculos/vw-fox.webp", false)] //Veículos teste
 
   constructor() { }
 
@@ -18,6 +18,10 @@ export class VeiculoService {
 
   statusAnuncio(veiculo: Veiculo) {
     return veiculo.status
+  }
+
+  excluirAnuncio(id: string) {
+    this.veiculos = this.veiculos.filter(v => v.id !== id);
   }
 
   adicionar(veiculo: Veiculo) {

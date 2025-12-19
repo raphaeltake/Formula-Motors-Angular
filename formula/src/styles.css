@@ -2,6 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
+:root {
+  --verde: #dce775;
+  --verdeHover: rgba(225, 245, 97, 0.762);
+  --cinzaClaro: rgb(46, 46, 53);
+}
+
 @theme {
   --color-branco: rgb(244 244 245);
   --color-verde: #dce775;
@@ -10,11 +16,18 @@
   --color-cinza: rgb(33, 33, 37);
   --color-cinzaClaro: rgb(46, 46, 53);
   --color-vermelho: #e77575;
+  --color-vermelhoHover: #cc4e4e;
   --color-pretoTranslucido: rgba(24, 24, 27, 0.511);
 }
 
-.material-icons.verde { color: #dce775; }
-.material-icons.branco { color: rgb(244 244 245); }
+.material-icons.verde {
+  color: #dce775;
+  color: #cc4e4e;
+}
+
+.material-icons.branco {
+  color: rgb(244 244 245);
+}
 
 body {
   margin: 0;

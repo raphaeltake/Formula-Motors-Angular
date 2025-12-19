@@ -1,5 +1,5 @@
 @for (veiculo of listaVeiculos(); track veiculo.id){
-@if(veiculo.status === true || statusLogado()){ <!--Exibe para os clientes somente os veículos disponíveis--> 
+@if(veiculo.status === true || statusLogado()){ <!--Exibe para os clientes somente os veículos disponíveis-->
 <div class="grid grid-cols-[auto_1fr_auto] max-h-70 mx-25 my-10 rounded-sm bg-cinza p-10 jus">
   <img [src]="veiculo.caminho_imagem" alt="" class="w-60 mr-10 ">
   <div class="grid items-center">
@@ -8,22 +8,59 @@
       <li>Ano: {{veiculo.ano}}</li>
       <li>Cor: {{veiculo.cor}}</li>
       <li>Motor: {{veiculo.motor}}</li>
+      <li>Pessoas: {{veiculo.qtde_pesssoas}}</li>
       @if(statusLogado()){ <!--Somente quem está logado como funcionário pode ter acesso ao status-->
-      <li>Status: <span class="text-{{veiculo.status ? 'verde' : 'vermelho'}}">{{statusVeiculoTexto(veiculo)}}</span></li>
+      <li>Status: <span [ngClass]="veiculo.status ? 'text-verde' : 'text-vermelho'">{{statusVeiculoTexto(veiculo)}}</span></li>
       }
     </ul>
   </div>
   @if(statusLogado()){ <!--Somente quem está logado como funcionário pode utilizar esse botões-->
   <div>
     <ul class="grid gap-4 text-preto w-40 h-full">
-      <li><button type="button" class="bg-verde hover:bg-verdeHover px-8 py-3 w-full rounded-sm cursor-pointer">Editar</button></li> <!--Edita o anúncio-->
+      <li><button type="button" (click)="setModoEdicao(veiculo)" class="bg-verde hover:bg-verdeHover px-8 py-3 w-full rounded-sm cursor-pointer">Editar</button></li> <!--Edita o anúncio-->
 
       <li><button type="button" (click)="setAnuncioStatus(veiculo)" class="bg-verde hover:bg-verdeHover px-8 py-3 w-full rounded-sm cursor-pointer">{{statusBotaoCancelarOuAtivar(veiculo)}}</button></li> <!--cancela/ativa o anúncio-->
 
-      <li><button type="button" class="bg-verde hover:bg-verdeHover px-8 py-3 w-full rounded-sm cursor-pointer">Apagar</button></li> <!--Excluí o anúncio-->
+      <li><button type="button" (click)="excluirAnuncio(veiculo.id)" class="bg-vermelho hover:bg-vermelhoHover px-8 py-3 w-full rounded-sm cursor-pointer flex justify-center"><mat-icon fontIcon="delete"></mat-icon> Apagar</button></li> <!--Excluí o anúncio-->
     </ul>
   </div>
   }
 </div>
 }
+}
+
+@if (modoEdicao) {
+<div class="fixed flex inset-0 bg-pretoTranslucido z-40 justify-center items-center" (click)="setModoEdicao()">
+  <section (click)="$event.stopPropagation()" class="bg-cinza text-branco p-5 w-[80%]">
+
+    <form>
+      <div class="grid grid-cols-2 gap-5">
+        <div class="grid grid-cols-2 gap-5">
+          <input type="text" [(ngModel)]="veiculoEdit!.modelo" name="modelo">
+          <input type="text" [(ngModel)]="veiculoEdit!.marca" name="marca">
+          <input type="text" [(ngModel)]="veiculoEdit!.categoria" name="categoria">
+          <input type="text" [(ngModel)]="veiculoEdit!.ano" name="ano">
+          <input type="text" [(ngModel)]="veiculoEdit!.cor" name="cor">
+          <input type="text" [(ngModel)]="veiculoEdit!.valor" name="valor">
+          <input type="text" [(ngModel)]="veiculoEdit!.motor" name="motor">
+          <input type="number" [(ngModel)]="veiculoEdit!.qtde_pesssoas" name="qtde_pesssoas">
+        </div>
+
+        <div class="bg-contain bg-no-repeat bg-center" [style.backgroundImage]="previewImagem ? 'url(' + previewImagem + ')' : 'url(' + veiculoEdit!.caminho_imagem + ')'">
+          <input type="file" (change)="alterarImagem($event)" accept="image/*" class="cursor-pointer h-full w-full">
+        </div>
+      </div>
+
+      <div class="flex gap-5 mt-5 text-preto">
+        <button type="button" (click)="setModoEdicao()" class="bg-vermelho hover:bg-vermelhoHover px-4 py-3 w-full cursor-pointer rounded-sm">
+          Cancelar
+        </button>
+
+        <button type="submit" class="bg-verde hover:bg-verdeHover px-4 py-3 w-full cursor-pointer rounded-sm">
+          Salvar
+        </button>
+      </div>
+    </form>
+  </section>
+</div>
 }

@@ -1,3 +1,24 @@
-<main>
-  
-</main>
+<section class="flex justify-center">
+  <div class="bg-cinza text-branco p-5 w-[80%]">
+    <form action="" editVeiculos="ngForm">
+      <div class="grid grid-cols-2 gap-5">
+        <div class="grid grid-cols-2 gap-5">
+          <input type="text" placeholder="Modelo:" name="modelo">
+          <input type="text" placeholder="Marca:" name="marca">
+          <input type="text" placeholder="Categoria:" name="categoria">
+          <input type="text" placeholder="Ano:" name="ano">
+          <input type="text" placeholder="Cor:" name="cor">
+          <input type="text" placeholder="Valor:" name="valor">
+          <input type="text" placeholder="Motor:" name="motor">
+          <input type="number" min="1" placeholder="Quantidade Pessoas:" name="qtde_pesssoas">
+        </div>
+        <div class="bg-contain bg-no-repeat bg-center" [style.backgroundImage]="previewImagem ? 'url(' + previewImagem + ')' : '/assets/imagens/uploadImage.webp'">
+          <input type="file" (change)="alterarImagem($event)" accept="image/*" placeholder="Imagem:" name="imagem" class="cursor-pointer h-full w-full">
+        </div>
+      </div>
+      <div class="col-span-2 flex justify-center gap-5 mt-5">
+        <button type="submit" class="cursor-pointer bg-verde hover:bg-verdeHover text-preto px-4 py-3 rounded-sm w-full">Salvar</button>
+      </div>
+    </form>
+  </div>
+</section>

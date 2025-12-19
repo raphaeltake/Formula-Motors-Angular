@@ -18,4 +18,21 @@ export class CadastrarVeiculosComponent {
   // adicionar(){
   //   this.service.adicionar(this.veiculo)
   // }
+
+  uploadImage = '/assets/imagens/uploadImage.webp'
+  arquivoSelecionado!: File;
+  previewImagem!: string | ArrayBuffer | null
+  alterarImagem(event: Event){
+    const input = event.target as HTMLInputElement
+
+    if (input.files && input.files.length > 0){
+      this.arquivoSelecionado = input.files[0]
+      const reader = new FileReader()
+      reader.onload = () => {
+        this.previewImagem = reader.result
+        console.log(reader.result)
+      }
+      reader.readAsDataURL(this.arquivoSelecionado)
+    }
+  }
 }

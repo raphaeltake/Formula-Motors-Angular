@@ -1,0 +1,14 @@
+input{
+  padding: 0.5rem;
+  border: 2px solid var(--color-cinzaClaro);
+  outline: 0;
+  border-radius: 0.25rem;
+}
+
+input:hover{
+  border: 2px solid var(--color-verdeHover);
+}
+
+input:focus{
+  border: 2px solid var(--color-verdeHover)
+}
