@@ -1,7 +1,7 @@
-@for (veiculo of listaVeiculos(); track veiculo.id){
-@if(veiculo.status === true || statusLogado()){ <!--Exibe para os clientes somente os veículos disponíveis-->
+@for (veiculo of listaVeiculos; track veiculo.id){
+@if(statusVeiculo(veiculo) === true || statusLogado()){ <!--Exibe para os clientes somente os veículos disponíveis-->
 <div class="grid grid-cols-[auto_1fr_auto] max-h-70 mx-25 my-10 rounded-sm bg-cinza p-10 jus">
-  <img [src]="veiculo.caminho_imagem" alt="" class="w-60 mr-10 ">
+  <img [src]="`\\assets\\imgVeiculos\\${veiculo.caminho_imagem}`" alt="" class="w-60 mr-10 ">
   <div class="grid items-center">
     <h2 class="text-6xl font-bold">{{veiculo.modelo}} | R${{veiculo.valor}} | {{veiculo.categoria}}</h2>
     <ul class="flex gap-10 text-[1.3rem]">
@@ -10,7 +10,7 @@
       <li>Motor: {{veiculo.motor}}</li>
       <li>Pessoas: {{veiculo.qtde_pesssoas}}</li>
       @if(statusLogado()){ <!--Somente quem está logado como funcionário pode ter acesso ao status-->
-      <li>Status: <span [ngClass]="veiculo.status ? 'text-verde' : 'text-vermelho'">{{statusVeiculoTexto(veiculo)}}</span></li>
+      <li>Status: <span [ngClass]="statusVeiculo(veiculo) ? 'text-verde' : 'text-vermelho'">{{statusVeiculoTexto(veiculo)}}</span></li>
       }
     </ul>
   </div>
@@ -21,7 +21,7 @@
 
       <li><button type="button" (click)="setAnuncioStatus(veiculo)" class="bg-verde hover:bg-verdeHover px-8 py-3 w-full rounded-sm cursor-pointer">{{statusBotaoCancelarOuAtivar(veiculo)}}</button></li> <!--cancela/ativa o anúncio-->
 
-      <li><button type="button" (click)="excluirAnuncio(veiculo.id)" class="bg-vermelho hover:bg-vermelhoHover px-8 py-3 w-full rounded-sm cursor-pointer flex justify-center"><mat-icon fontIcon="delete"></mat-icon> Apagar</button></li> <!--Excluí o anúncio-->
+      <li><button type="button" (click)="setConfirmacaoApagarModal(veiculo)" class="bg-vermelho hover:bg-vermelhoHover px-8 py-3 w-full rounded-sm cursor-pointer flex justify-center"><mat-icon fontIcon="delete"></mat-icon>Apagar</button></li> <!--Excluí o anúncio-->
     </ul>
   </div>
   }
@@ -29,10 +29,21 @@
 }
 }
 
+@if(confirmacaoApagar){
+<div class="fixed flex inset-0 z-50 bg-pretoTranslucido text-Branco justify-center items-center" (click)="setConfirmacaoApagarModal()">
+  <div (click)="$event.stopPropagation()" class="flex flex-col gap-5 p-10 rounded-sm bg-cinza">
+    <h2 class="text-2xl">Deseja realmente apagar o anúncio?</h2>
+    <div class="grid grid-cols-2 text-preto gap-5">
+      <button type="button" (click)="setConfirmacaoApagarModal()" class="cursor-pointer py-2 rounded-sm bg-vermelho hover:bg-vermelhoHover">Não</button>
+      <button type="button" (click)="excluirAnuncio(veiculoExcluir!.id)" class="cursor-pointer py-2 rounded-sm bg-verde hover:bg-verdeHover">Sim</button>
+    </div>
+  </div>
+</div>
+}
+
 @if (modoEdicao) {
 <div class="fixed flex inset-0 bg-pretoTranslucido z-40 justify-center items-center" (click)="setModoEdicao()">
   <section (click)="$event.stopPropagation()" class="bg-cinza text-branco p-5 w-[80%]">
-
     <form>
       <div class="grid grid-cols-2 gap-5">
         <div class="grid grid-cols-2 gap-5">
@@ -46,7 +57,9 @@
           <input type="number" [(ngModel)]="veiculoEdit!.qtde_pesssoas" name="qtde_pesssoas">
         </div>
 
-        <div class="bg-contain bg-no-repeat bg-center" [style.backgroundImage]="previewImagem ? 'url(' + previewImagem + ')' : 'url(' + veiculoEdit!.caminho_imagem + ')'">
+        <div class="bg-contain bg-no-repeat bg-center" [style.backgroundImage]="'url(' + (previewImagem ? previewImagem : 'assets/imgVeiculos/' + veiculoEdit!.caminho_imagem) + ')'">
+
+
           <input type="file" (change)="alterarImagem($event)" accept="image/*" class="cursor-pointer h-full w-full">
         </div>
       </div>
@@ -56,7 +69,7 @@
           Cancelar
         </button>
 
-        <button type="submit" class="bg-verde hover:bg-verdeHover px-4 py-3 w-full cursor-pointer rounded-sm">
+        <button type="submit" (click)="salvarEdicao(veiculoEdit!)" class="bg-verde hover:bg-verdeHover px-4 py-3 w-full cursor-pointer rounded-sm">
           Salvar
         </button>
       </div>

@@ -1,23 +1,23 @@
 <section class="flex justify-center">
   <div class="bg-cinza text-branco p-5 w-[80%]">
-    <form action="" editVeiculos="ngForm">
-      <div class="grid grid-cols-2 gap-5">
-        <div class="grid grid-cols-2 gap-5">
-          <input type="text" placeholder="Modelo:" name="modelo">
-          <input type="text" placeholder="Marca:" name="marca">
-          <input type="text" placeholder="Categoria:" name="categoria">
-          <input type="text" placeholder="Ano:" name="ano">
-          <input type="text" placeholder="Cor:" name="cor">
-          <input type="text" placeholder="Valor:" name="valor">
-          <input type="text" placeholder="Motor:" name="motor">
-          <input type="number" min="1" placeholder="Quantidade Pessoas:" name="qtde_pesssoas">
+    <form action="" #editVeiculos="ngForm" (ngSubmit)="adicionar()">
+      <div class="grid grid-cols-3 gap-5">
+        <div class="grid col-span-2 grid-cols-2 gap-5">
+          <input type="text" placeholder="Modelo:" name="modelo" [(ngModel)]="veiculo.modelo">
+          <input type="text" placeholder="Marca:" name="marca" [(ngModel)]="veiculo.marca">
+          <input type="text" placeholder="Categoria:" name="categoria" [(ngModel)]="veiculo.categoria">
+          <input type="text" placeholder="Ano:" name="ano" [(ngModel)]="veiculo.ano">
+          <input type="text" placeholder="Cor:" name="cor" [(ngModel)]="veiculo.cor">
+          <input type="text" placeholder="Valor:" name="valor" [(ngModel)]="veiculo.valor">
+          <input type="text" placeholder="Motor:" name="motor" [(ngModel)]="veiculo.motor">
+          <input type="number" min="1" placeholder="Quantidade Pessoas:" name="qtde_pesssoas" [(ngModel)]="veiculo.qtde_pesssoas">
         </div>
-        <div class="bg-contain bg-no-repeat bg-center" [style.backgroundImage]="previewImagem ? 'url(' + previewImagem + ')' : '/assets/imagens/uploadImage.webp'">
-          <input type="file" (change)="alterarImagem($event)" accept="image/*" placeholder="Imagem:" name="imagem" class="cursor-pointer h-full w-full">
+        <div class="bg-contain bg-no-repeat bg-center max-w-fit justify-self-center" [style.backgroundImage]="'url('+ `${previewImagem ? previewImagem : uploadImage}` +')'">
+          <input type="file" (change)="alterarImagem($event)" accept="image/*" placeholder="Imagem:" name="imagem" class="cursor-pointer h-full w-full" >
         </div>
       </div>
       <div class="col-span-2 flex justify-center gap-5 mt-5">
-        <button type="submit" class="cursor-pointer bg-verde hover:bg-verdeHover text-preto px-4 py-3 rounded-sm w-full">Salvar</button>
+        <button type="submit" (submit)="adicionar()" class="cursor-pointer bg-verde hover:bg-verdeHover text-preto px-4 py-3 rounded-sm w-full">Salvar</button>
       </div>
     </form>
   </div>

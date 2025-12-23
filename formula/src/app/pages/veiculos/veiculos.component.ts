@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Veiculo } from '../../models/veiculo';
 import { FuncionariosService } from '../../services/funcionarios.service';
 import { VeiculoService } from '../../services/veiculo.service';
@@ -12,13 +12,16 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './veiculos.component.html',
   styleUrl: './veiculos.component.css'
 })
-export class VeiculosComponent {
+export class VeiculosComponent implements OnInit {
 
   estiloLinhas: boolean = true //Verifica se o estilo escolhido é de linhas (true) ou colunas (false)
   modoEdicao: boolean = false //Permite editar os dados dos veículos
+  confirmacaoApagar: boolean = false
+  veiculoExcluir: Veiculo | null = null
   veiculoEdit: Veiculo | null = null
   arquivoSelecionado!: File | null;
   previewImagem!: string | ArrayBuffer | null
+  listaVeiculos: Veiculo[] = []
 
   constructor(
     private serviceFuncionarios: FuncionariosService,
@@ -26,20 +29,24 @@ export class VeiculosComponent {
   ) {
   }
 
-  listaVeiculos() {
-    return this.serviceVeiculos.veiculos
+  ngOnInit() {
+    this.listaVeiculos = this.serviceVeiculos.listarVeiculos()
   }
 
   statusLogado() {
     return this.serviceFuncionarios.statusLogado()
   }
 
+  statusVeiculo(veiculo: Veiculo): boolean {
+    return this.serviceVeiculos.statusAnuncio(veiculo)
+  }
+
   statusVeiculoTexto(veiculo: Veiculo) {
-    return this.serviceVeiculos.statusAnuncio(veiculo) ? "Disponível" : "Indisponível"
+    return this.statusVeiculo(veiculo) ? "Disponível" : "Indisponível"
   }
 
   statusBotaoCancelarOuAtivar(veiculo: Veiculo) {
-    return this.serviceVeiculos.statusAnuncio(veiculo) ? "Cancelar" : "Ativar"
+    return this.statusVeiculo(veiculo) ? "Cancelar" : "Ativar"
   }
 
   setAnuncioStatus(veiculo: Veiculo) {
@@ -52,6 +59,8 @@ export class VeiculosComponent {
 
   excluirAnuncio(id: string) {
     this.serviceVeiculos.excluirAnuncio(id)
+    this.setConfirmacaoApagarModal()
+    this.listaVeiculos = this.serviceVeiculos.listarVeiculos()
   }
 
   getTamanhoScrollbar() {
@@ -59,10 +68,10 @@ export class VeiculosComponent {
   }
 
   setModoEdicao(veiculo?: Veiculo) {
-    if(veiculo){
-      this.veiculoEdit = { ...veiculo}
+    if (veiculo) {
+      this.veiculoEdit = { ...veiculo }
       this.modoEdicao = true
-    } else{
+    } else {
       this.modoEdicao = false
       this.veiculoEdit = null
     }
@@ -71,7 +80,6 @@ export class VeiculosComponent {
     document.body.style.overflow = this.modoEdicao ? 'hidden' : 'auto'
     this.previewImagem = null
     this.arquivoSelecionado = null
-
   }
 
   alterarImagem(event: Event) {
@@ -83,6 +91,26 @@ export class VeiculosComponent {
         this.previewImagem = reader.result
       }
       reader.readAsDataURL(this.arquivoSelecionado)
+      this.veiculoEdit!.caminho_imagem = this.arquivoSelecionado.name
     }
+  }
+
+  setConfirmacaoApagarModal(veiculo?: Veiculo) {
+    if (veiculo) {
+      this.veiculoExcluir = { ...veiculo }
+      this.confirmacaoApagar = true
+    } else {
+      this.confirmacaoApagar = false
+      this.veiculoExcluir = null
+    }
+
+    document.body.style.paddingRight = this.modoEdicao ? `${this.getTamanhoScrollbar()}px` : '0px'
+    document.body.style.overflow = this.modoEdicao ? 'hidden' : 'auto'
+  }
+
+  salvarEdicao(veiculo: Veiculo){
+    this.serviceVeiculos.salvarEdicao(veiculo)
+    this.listaVeiculos = this.serviceVeiculos.listarVeiculos()
+    this.setModoEdicao()
   }
 }
