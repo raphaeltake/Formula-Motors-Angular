@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Veiculo } from '../../models/veiculo';
 import { FuncionariosService } from '../../services/funcionarios.service';
 import { VeiculoService } from '../../services/veiculo.service';
 import { NgClass } from "@angular/common";
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-veiculos',
@@ -22,6 +23,7 @@ export class VeiculosComponent implements OnInit {
   arquivoSelecionado!: File | null;
   previewImagem!: string | ArrayBuffer | null
   listaVeiculos: Veiculo[] = []
+  private _snackBar = inject(MatSnackBar)
 
   constructor(
     private serviceFuncionarios: FuncionariosService,
@@ -51,6 +53,7 @@ export class VeiculosComponent implements OnInit {
 
   setAnuncioStatus(veiculo: Veiculo) {
     this.serviceVeiculos.setAnuncioStatus(veiculo)
+    this.exibirMensagemConfirmacao(this.statusVeiculo(veiculo) ? "Anúncio ativado" : "Anúncio cancelado")
   }
 
   setEstiloLinhas() {
@@ -61,6 +64,7 @@ export class VeiculosComponent implements OnInit {
     this.serviceVeiculos.excluirAnuncio(id)
     this.setConfirmacaoApagarModal()
     this.listaVeiculos = this.serviceVeiculos.listarVeiculos()
+    this.exibirMensagemConfirmacao("Anúncio apagado com sucesso!")
   }
 
   getTamanhoScrollbar() {
@@ -108,9 +112,14 @@ export class VeiculosComponent implements OnInit {
     document.body.style.overflow = this.modoEdicao ? 'hidden' : 'auto'
   }
 
-  salvarEdicao(veiculo: Veiculo){
+  salvarEdicao(veiculo: Veiculo) {
     this.serviceVeiculos.salvarEdicao(veiculo)
     this.listaVeiculos = this.serviceVeiculos.listarVeiculos()
     this.setModoEdicao()
+    this.exibirMensagemConfirmacao("Anúncio editado com sucesso!")
+  }
+
+  exibirMensagemConfirmacao(mensagem: string) {
+    this._snackBar.open(mensagem, "OK")
   }
 }

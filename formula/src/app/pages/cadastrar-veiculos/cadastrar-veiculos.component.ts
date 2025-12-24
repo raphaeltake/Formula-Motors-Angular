@@ -1,7 +1,8 @@
-import { Component, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Veiculo } from '../../models/veiculo';
 import { VeiculoService } from '../../services/veiculo.service';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cadastrar-veiculos',
@@ -14,6 +15,7 @@ export class CadastrarVeiculosComponent {
   uploadImage = '/assets/imagens/uploadImage.webp'
   arquivoSelecionado!: File;
   previewImagem!: string | ArrayBuffer | null
+  private _snackBar = inject(MatSnackBar)
 
   constructor(
     private service: VeiculoService,
@@ -23,6 +25,7 @@ export class CadastrarVeiculosComponent {
     this.service.adicionar(this.veiculo)
     this.veiculo = Veiculo.newVeiculo()
     this.previewImagem = ''
+    this.exibirMensagemConfirmacao()
   }
 
   alterarImagem(event: Event) {
@@ -39,5 +42,9 @@ export class CadastrarVeiculosComponent {
       reader.readAsDataURL(this.arquivoSelecionado)
       this.veiculo.caminho_imagem = this.arquivoSelecionado.name
     }
+  }
+
+  exibirMensagemConfirmacao() {
+    this._snackBar.open("Veículo adicionado com sucesso!", "OK")
   }
 }

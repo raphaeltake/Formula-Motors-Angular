@@ -3,6 +3,7 @@
 <div class="grid grid-cols-[auto_1fr_auto] max-h-70 mx-25 my-10 rounded-sm bg-cinza p-10 jus">
   <img [src]="`\\assets\\imgVeiculos\\${veiculo.caminho_imagem}`" alt="" class="w-60 mr-10 ">
   <div class="grid items-center">
+    <p class="text-[1.1rem]">{{veiculo.marca}}</p>
     <h2 class="text-6xl font-bold">{{veiculo.modelo}} | R${{veiculo.valor}} | {{veiculo.categoria}}</h2>
     <ul class="flex gap-10 text-[1.3rem]">
       <li>Ano: {{veiculo.ano}}</li>
